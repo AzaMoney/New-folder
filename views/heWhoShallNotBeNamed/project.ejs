@@ -1,0 +1,24 @@
+<div class="userAdmin">
+<nav class="adminNav">
+    <ul class="adminUl">
+        <li><a href="/heWhoShallNotBeNamed/admin">Admin Panel</a></li>
+        <li><a href="/heWhoShallNotBeNamed/user">User Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/project">Project Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/mentorship">Mentorship Admin</a></li>
+    </ul>
+</nav>
+
+<!-- projectPage.ejs -->
+
+<h1>All Projects</h1>
+
+<ul>
+    <% projects.forEach(project => { %>
+        <li>
+            <strong>Name:</strong> <%= project.project_name %><br>
+            <strong>Status:</strong> <%= project.project_status %><br>
+            <button class="btn btn-primary btn-block" onclick="window.location='/heWhoShallNotBeNamed/project-details/<%= project.projectid %>'">View Project</button>
+        </li>
+    <% }); %>
+</ul>
+</div>

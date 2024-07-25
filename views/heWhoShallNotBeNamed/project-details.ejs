@@ -1,0 +1,101 @@
+  <nav class="adminNav">
+    <ul class="adminUl">
+      <li><a href="/heWhoShallNotBeNamed/admin">Admin Panel</a></li>
+      <li><a href="/heWhoShallNotBeNamed/user">User Admin</a></li>
+      <li><a href="/heWhoShallNotBeNamed/project">Project Admin</a></li>
+      <li><a href="/heWhoShallNotBeNamed/mentorship">Mentorship Admin</a></li>
+    </ul>
+  </nav>
+
+  <div class="container projectDetailPage">
+    <!-- Project Image -->
+
+    <h2>
+      <%= projectDetails.project_name %>
+    </h2>
+
+    <div class="details-container">
+      <p><strong>Description:</strong>
+        <%= projectDetails.project_description %>
+      </p>
+      <p><strong>Mission:</strong>
+        <%= projectDetails.project_mission %>
+      </p>
+      <p><strong>Vision:</strong>
+        <%= projectDetails.project_vision %>
+      </p>
+      <p><strong>Worthy of Note:</strong>
+        <%= projectDetails.project_worthy_of_note %>
+      </p>
+      <p><strong>Location:</strong>
+        <%= projectDetails.project_state %>, <%= projectDetails.project_country %>
+      </p>
+      <!-- Add more project details as needed -->
+
+      <% if (projectDetails.project_status==="submitted" ) { %>
+        <!-- Approve Button -->
+        <form action="/heWhoShallNotBeNamed/approve-project/<%= projectDetails.projectid %>" method="POST">
+          <input type="hidden" name="projectId" value="<%= projectDetails.projectID %>">
+          <button type="submit">Approve Project</button>
+        </form>
+        <% } %>
+
+          <!-- Contact Project Owner Button -->
+          <button onclick="window.location.href='/contact-owner/<%= projectDetails.project_ownerID %>'">Contact Project
+            Owner</button>
+
+          <!-- Delete Button -->
+          <form action="/delete-project" method="POST">
+            <input type="hidden" name="projectId" value="<%= projectDetails.projectID %>">
+            <button type="submit">Delete Project</button>
+          </form>
+
+          <!-- Ban Button -->
+          <form action="/ban-project-owner" method="POST">
+            <input type="hidden" name="ownerId" value="<%= projectDetails.project_ownerID %>">
+            <button type="submit">Ban Project Owner</button>
+          </form>
+    </div>
+
+    <% if (projectRoles && projectRoles.length> 0) { %>
+      <h2>Project Roles:</h2>
+      <ul>
+        <% projectRoles.forEach(role=> { %>
+          <li>
+            <strong>
+              <%= role.project_role_name %>:
+            </strong>
+            <%= role.project_role_description %>
+          </li>
+          <% }); %>
+      </ul>
+      <% } else { %>
+        <h2>No project roles</h2>
+        <% } %>
+
+          <% if (teamMembers && teamMembers.length> 0) { %>
+            <h2>Team Members:</h2>
+            <ul class="card-list">
+              <% teamMembers.forEach(member=> { %>
+                <li class="card detailcard">
+                  <div>
+                    <img src="<%= member.user_picture %>" alt="<%= member.user_name %>" />
+                  </div>
+                  <div>
+                    <h3>
+                      <%= member.user_name %>
+                    </h3>
+                    <p><strong>Role: </strong>
+                      <%= member.project_role %>
+                    </p>
+                    <button class="btn btn-primary btn-block"
+                      onclick="window.location.href='/user-account/user-profile/<%= member.user_id  %>'">View
+                      Resume</button>
+                  </div>
+                </li>
+                <% }); %>
+            </ul>
+            <% } else { %>
+              <p>No Team Member</p>
+              <% } %>
+  </div>

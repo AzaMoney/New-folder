@@ -1,0 +1,28 @@
+<h2>Work Experience</h2>
+
+<form action="../user-account/edit-skill" method="post">
+    <fieldset>
+ <!-- Skill Information -->
+    <label for="skill_name">Skill Name:</label>
+    <input type="text" id="skill_name" name="skill_name" required>
+
+    <!-- Add other fields for skill information -->
+    <button type="submit">Add Skill</button>
+</fieldset>
+</form>
+
+<section class="skills">
+    <h2>Skills</h2>
+    <% if (skills && skills.length > 0) { %>
+      <ul>
+        <% skills.forEach(skill => { %>
+          <div class="resumeDelete"><li><%= skill.skill_name %></li><a class="material-icons" href="/user-account/delete-skill/<%= skill.skillid %>">&#xe872;</a></div>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>No skills information available</p>
+    <% } %>
+    <!-- Add more skills as needed -->
+  </section>
+
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/my-account'">Done</button>

@@ -1,0 +1,62 @@
+<h2>Work Experience</h2>
+
+<form action="../user-account/edit-experience" method="post">
+    <fieldset>
+  <!-- Employment Information -->
+    <label for="organization_name">Organization Name:</label>
+    <input type="text" id="organization_name" name="organization_name" required>
+
+    <label for="position_name">Position Name:</label>
+    <input type="text" id="position_name" name="position_name" required>
+
+    <label for="employment_type">Employment Type:</label>
+    <input type="text" id="employment_type" name="employment_type">
+
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date">
+
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date">
+
+    <label for="employment_location_city">City:</label>
+    <input type="text" id="employment_location_city" name="employment_location_city">
+
+    <label for="employment_location_state">State:</label>
+    <input type="text" id="employment_location_state" name="employment_location_state">
+
+    <label for="employment_location_country">Country:</label>
+    <input type="text" id="employment_location_country" name="employment_location_country">
+
+    <label for="employment_status">Employment Status:</label>
+    <input type="text" id="employment_status" name="employment_status">
+
+    <!-- Add other fields for employment information -->
+
+    <!-- Employment Description -->
+    <label for="employment_description">Employment Description:</label>
+    <textarea id="employment_description" name="employment_description"></textarea>
+
+    <!-- Add other fields for employment description -->
+    <button type="submit">Add Experience</button>
+</fieldset>
+</form>
+
+<section class="experience">
+    <h2>Work Experience</h2>
+    <% if (employment && employment.length > 0) { %>
+      <% employment.forEach(exp => { %>
+        <% console.log('Experience Object:', exp); %>
+        <div class="resumeDelete"><h3><%= exp.organization_name %></h3><a class="material-icons" href="/user-account/delete-experience/<%= exp.emplomentid %>">&#xe872;</a></div>
+        <p><%= exp.position_name %></p>
+        <p><%= exp.start_date ? exp.start_date.toISOString().split('T')[0] : 'N/A' %></p>
+        <p><%= exp.end_date ? exp.end_date.toISOString().split('T')[0] : 'N/A' %></p>
+        <p><%= exp.employment_description || 'N/A' %></p>
+      <% }); %>
+    <% } else { %>
+      <p>No work experience information available</p>
+    <% } %>
+    <!-- Add more work experience details as needed -->
+  </section>
+  
+
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/my-account'">Done</button>

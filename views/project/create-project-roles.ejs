@@ -1,0 +1,65 @@
+
+<h2>Project Role Information</h2>
+
+<form action="../project/create-project-roles" method="post">
+    <fieldset>
+
+        <!-- Project Role Information -->
+        <label for="project_role_name">Role Name:</label>
+        <select id="project_role_name" name="project_role_name" required>
+            <option value="" disabled selected>Select a Role</option>
+            
+            <!-- Business Roles -->
+            <optgroup label="Business Roles">
+                <option value="CEO">CEO (Chief Executive Officer)</option>
+                <option value="COO">COO (Chief Operating Officer)</option>
+                <option value="CFO">CFO (Chief Financial Officer)</option>
+                <option value="CMO">CMO (Chief Marketing Officer)</option>
+                <option value="CTO">CTO (Chief Technology Officer)</option>
+                <option value="CHRO">CHRO (Chief Human Resources Officer)</option>
+                <option value="CIO">CIO (Chief Information Officer)</option>
+                <option value="General Manager">General Manager</option>
+                <option value="Sales Manager">Sales Manager</option>
+                <option value="Customer Service Manager">Customer Service Manager</option>
+                <!-- Add other business roles as needed -->
+            </optgroup>
+            
+            <!-- Project Roles -->
+            <optgroup label="Project Roles">
+                <option value="Project Manager">Project Manager</option>
+                <option value="Team Lead">Team Lead</option>
+                <option value="Business Analyst">Business Analyst</option>
+                <option value="Developer">Developer</option>
+                <option value="Designer">Designer</option>
+                <option value="Tester">Tester</option>
+                <option value="Scrum Master">Scrum Master</option>
+                <option value="Product Owner">Product Owner</option>
+                <option value="Quality Assurance">Quality Assurance</option>
+                <!-- Add other project roles as needed -->
+            </optgroup>
+        </select>
+
+        <label for="project_role_description">Role Description:</label>
+        <textarea id="project_role_description" name="project_role_description"></textarea>
+
+        <!-- Add other fields for project role information -->
+
+        <button type="submit">Add Role</button>
+    </fieldset>
+</form>
+
+<!-- Display Initiated Project Roles -->
+<% if (initiatedProjectsRoles && initiatedProjectsRoles.length > 0) { %>
+    <h2>Project Roles:</h2>
+    <ul>
+        <% initiatedProjectsRoles.forEach(role => { %>
+            <li>
+                <strong><%= role.project_role_name %></strong>: <%= role.project_role_description %>
+            </li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>project roles:</p>
+<% } %>
+
+<button class="btn btn-primary btn-block" onclick="window.location='/project/create-project-communication'">Next: Project Communication</button>

@@ -1,0 +1,10 @@
+<header>
+
+  <% if (isAuthenticated) { %>
+    <button class="btn btn-primary btn-block" onclick="window.location='/user-account/my-account'">My Account</button>
+    <button class="btn btn-primary btn-block" onclick="window.location='/auth/logout'">Log Out</button>
+  <% } else { %>
+    <button class="btn btn-primary btn-block" onclick="window.location='/auth/login'">Login</button>
+    <button class="btn btn-primary btn-block" onclick="window.location='/auth/login'">Sign Up</button>
+  <% } %>
+</header>

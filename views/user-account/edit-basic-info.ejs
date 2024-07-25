@@ -1,0 +1,28 @@
+<h2>Basic Information</h2>
+
+<form action="../user-account/edit-basic-info" method="post">
+    
+    <fieldset>
+
+        <label for="user_about">Me in 60 seconds:</label>
+        <textarea id="user_about" name="user_about"><%= account.user_about %></textarea>
+
+        <label for="user_email">Email:</label>
+        <input type="email" id="user_email" name="user_email" required value="<%= account.user_email %>">
+
+        <label for="user_phone">Phone Number:</label>
+        <input type="tel" id="user_phone" name="user_phone" value="<%= account.user_phone %>">
+
+        <label for="user_website">Website:</label>
+        <input type="url" id="user_website" name="user_website" value="<%= account.user_website %>">
+
+        <label for="user_linkedin">LinkedIn Profile:</label>
+        <input type="text" id="user_linkedin" name="user_linkedin" value="<%= account.user_linkedin %>">
+
+        <label for="user_github">GitHub Profile:</label>
+        <input type="text" id="user_github" name="user_github" value="<%= account.user_github %>">
+
+    </fieldset>
+
+        <button type="submit">Done</button>
+</form>

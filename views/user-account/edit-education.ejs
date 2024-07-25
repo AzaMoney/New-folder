@@ -1,0 +1,35 @@
+<h2>Education</h2>
+
+<form action="../user-account/edit-education" method="post">
+    <fieldset>
+        <!-- Education Information -->
+        <label for="school_name">School Name:</label>
+        <input type="text" id="school_name" name="school_name" required>
+
+        <label for="degree_name">Degree Name:</label>
+        <input type="text" id="degree_name" name="degree_name" required>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date">
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date">
+
+        <button type="submit">Add School</button>
+    </fieldset>
+</form>
+    <section class="education">
+        <h2>Education:</h2>
+        <% if (education && education.length > 0) { %>
+          <% education.forEach(edu => { %>
+            <div class="resumeDelete"><h3><%= edu.school_name %></h3><a class="material-icons" href="/user-account/delete-education/<%= edu.educationid %>">&#xe872;</a></div>
+            <p><%= edu.degree_name %></p>
+            <p><%= edu.start_date.toISOString().split('T')[0] %></p>
+            <p><%= edu.end_date.toISOString().split('T')[0] %></p>
+          <% }); %>
+        <% } else { %>
+          <p>No education information available.</p>
+        <% } %>
+        <!-- Add more education details as needed -->
+      </section>
+      <button class="btn btn-primary btn-block" onclick="window.location='/user-account/my-account'">Done</button>

@@ -1,0 +1,35 @@
+.userAdmin {
+    text-align: center;
+}
+
+.userAdmin table {
+    justify-self: center;
+    width: 100%;
+
+}
+
+.userAdmin table tbody tr{
+    border-color: black;
+
+}
+
+.userAdmin_action {
+    display: flex;
+    flex-direction: row;
+}
+
+.userAdmin ul li {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.men li {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.adminTable {
+    width: 100%;
+}

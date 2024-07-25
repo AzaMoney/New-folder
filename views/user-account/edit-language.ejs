@@ -1,0 +1,28 @@
+<h2>Work Experience</h2>
+
+<form action="../user-account/edit-language" method="post">
+    <fieldset>
+    <!-- Language Information -->
+    <label for="language_name">Language Name:</label>
+    <input type="text" id="language_name" name="language_name" required>
+
+    <!-- Add other fields for language information -->
+    <button type="submit">Add Language</button>
+</fieldset>
+</form>
+
+<section class="languages">
+    <h2>Languages</h2>
+    <% if (languages && languages.length > 0) { %>
+      <ul>
+        <% languages.forEach(language => { %>
+          <div class="resumeDelete"><li><%= language.language_name %></li><a class="material-icons" href="/user-account/delete-language/<%= language.languageid %>">&#xe872;</a></div>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>No language information available</p>
+    <% } %>
+    <!-- Add more language details as needed -->
+  </section>
+
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/my-account'">Done</button>

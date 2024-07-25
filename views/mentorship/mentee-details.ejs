@@ -1,0 +1,45 @@
+<div class="container">
+    <!-- Project Image -->
+
+    <div>
+        <h3>
+            <%= userinfo.user_name %>
+        </h3>
+        <h4>Industry:</h4> <%= mentorship.mentorship_industry %>
+        <h4>Topic:</h4> <%= mentorship.mentorship_topic %>
+        <h4>Goal:</h4> <%= mentorship.mentorship_goal %>
+        <h4>Action on Goal:</h4> <%= mentorship.action_on_goal %>
+        <h4>Why a Mentor:</h4> <%= mentorship.why_a_mentor %>
+    </div>
+
+
+    <!-- Actions -->
+    <div class="actions">
+        <button class="btn btn-primary btn-block" onclick="openJoinProjectModal()">Offer to
+            Mentor</button>
+        <button class="btn btn-primary btn-block"
+            onclick="window.location.href='/user-account/user-profile/<%= userinfo.user_id %>'">View
+            Resume</button>
+    </div>
+</div>
+
+<!-- Modal for Join Project -->
+<div id="joinProjectModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeJoinProjectModal()">&times;</span>
+        <h2>Offer to Mentor</h2>
+        <form action="/mentorship/application-submitted/<%= mentorship.mentorshipid %>" method="post">
+            <fieldset>
+                <!-- Other fields from your form -->
+
+                <!-- New fields for mentorArea information -->
+                <label for="why_good_fit">Why are you a good fit for this opportunity?</label>
+                <textarea id="why_good_fit" name="why_good_fit" required></textarea>
+
+                <!-- Submit button -->
+                <button type="submit">Submit Application</button>
+            </fieldset>
+        </form>
+
+    </div>
+</div>

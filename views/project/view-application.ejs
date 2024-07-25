@@ -1,0 +1,17 @@
+<!-- applicationView.ejs -->
+<h2>Project Team Members</h2>
+<ul>
+  <% teamMembers.forEach(member => { %>
+    <li>
+      <img src="<%= member.user_picture %>" alt="<%= member.user_name %>" />
+      <p>Name: <%= member.user_name %></p>
+      <p>Time Commitment: <%= member.project_time_commitment %></p>
+      <p>Role: <%= member.project_role %></p>
+      <p>Why Role: <%= member.project_role_why %></p>
+      <p>Status: <%= member.project_member_status %></p>
+      <button class="btn btn-primary btn-block" onclick="window.location.href='/user-account/user-profile/<%= member.project_memberid  %>'">View Resume</button>
+      <button class="btn btn-primary" onclick="contactApplicant('<%= member.user_id %>')">Contact Applicant</button>
+      <button class="btn btn-primary btn-block" onclick="window.location.href='/project/approve-team-member/<%= member.project_teamid  %>'">Approve Application</button>
+    </li>
+  <% }); %>
+</ul>

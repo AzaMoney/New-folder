@@ -1,0 +1,31 @@
+<div class="userAdmin">
+<nav class="adminNav">
+    <ul class="adminUl">
+        <li><a href="/heWhoShallNotBeNamed/admin">Admin Panel</a></li>
+        <li><a href="/heWhoShallNotBeNamed/user">User Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/project">Project Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/mentorship">Mentorship Admin</a></li>
+    </ul>
+</nav>
+
+<h1>Mentorship Page</h1>
+
+<% if (mentorships.length > 0) { %>
+    <ul class="men">
+        <% mentorships.forEach((mentorship, index) => { %>
+            <li>
+                Mentor: <%= users[index].mentor ? users[index].mentor.user_name : 'Unknown' %><br>
+                Mentee: <%= users[index].mentee ? users[index].mentee.user_name : 'Unknown' %><br>
+                Mentor Area Status: <%= mentorship.mentorarea_status %><br>
+                <form method="POST" action="/delete-mentorship">
+                    <input type="hidden" name="mentorshipID" value="<%= mentorship.mentorshipID %>">
+                    <button type="submit">Delete Mentor Area</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+<% } else { %>
+    <p>No mentorship records found.</p>
+<% } %>
+
+</div>

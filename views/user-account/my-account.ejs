@@ -1,0 +1,125 @@
+<button class="btn btn-primary btn-block" onclick="exportToPDF()">Export as PDF</button>
+<button class="btn btn-primary btn-block" onclick="exportToDOC()">Export as DOC</button>
+<button class="btn btn-primary btn-block" onclick="copyProfileLink('<%= user.user_nickname %>')">Copy link</button>
+
+
+<section class="basic-info">
+  <img src="<%= user.user_picture %>" alt="Profile Image">
+  <h1><%= user.user_name %></h1>
+  <h2><%= employment.position_name %></h2>
+  <h3><%= employment.organization_name %></h3>
+</section>
+
+<section class="sixtySeconds">
+  <h2><%= user.user_name %> in 60 seconds</h2>
+  <p><%= user.user_about %></p>
+</section>
+
+<section class="contact">
+  <h2>Contact Information</h2>
+  <p>Email: <%= user.user_email %></p>
+  <p>Phone: <%= user.user_phone || 'N/A' %></p>
+  <p>Website: <%= user.user_website || 'N/A' %></p>
+  <p>LinkedIn: <a href="<%= user.user_linkedin %>" target="_blank">LinkedIn Profile</a></p>
+  <p>GitHub: <a href="<%= user.user_github %>" target="_blank">GitHub Profile</a></p>
+  <!-- Add more contact information as needed -->
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-basic-info'">Edit Information</button>
+</section>
+
+<section class="education">
+  <h2>Education</h2>
+  <% if (education && education.length > 0) { %>
+    <% education.forEach(edu => { %>
+      <h3><%= edu.school_name %></h3>
+      <p><%= edu.degree_name %></p>
+      <p><%= edu.start_date.toISOString().split('T')[0] %></p>
+      <p><%= edu.end_date.toISOString().split('T')[0] %></p>
+    <% }); %>
+  <% } else { %>
+    <p>No education information available.</p>
+  <% } %>
+  <!-- Add more education details as needed -->
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-education'">Edit Education</button>
+</section>
+
+<section class="certificate">
+  <h2>License and Certificates</h2>
+  <% if (certificates && certificates.length > 0) { %>
+    <% certificates.forEach(cert => { %>
+      <h3><%= cert.certificate_name %></h3>
+      <p><%= cert.issuer_name %></p>
+      <p><%= cert.issue_date.toISOString().split('T')[0] %></p>
+      <p><%= cert.expiration_date.toISOString().split('T')[0] %></p>
+    <% }); %>
+  <% } else { %>
+    <p>No certificates information available</p>
+  <% } %>
+  <!-- Add more certificate details as needed -->
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-certificate'">Edit certificate</button>
+</section>
+
+<section class="experience">
+  <h2>Work Experience</h2>
+  <% if (employment && employment.length > 0) { %>
+    <% employment.forEach(exp => { %>
+      <% console.log('Experience Object:', exp); %>
+      <div class="resumeDelete"><h3><%= exp.organization_name %></h3><a class="material-icons" href="/user-account/edit-basic-info">&#xe872;</a></div>
+      <p><%= exp.position_name %></p>
+      <p><%= exp.start_date ? exp.start_date.toISOString().split('T')[0] : 'N/A' %></p>
+      <p><%= exp.end_date ? exp.end_date.toISOString().split('T')[0] : 'N/A' %></p>
+      <p><%= exp.employment_description || 'N/A' %></p>
+    <% }); %>
+  <% } else { %>
+    <p>No work experience information available</p>
+  <% } %>
+  <!-- Add more work experience details as needed -->
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-experience'">Edit Experience</button>
+</section>
+
+<section class="skills">
+  <h2>Skills</h2>
+  <% if (skills && skills.length > 0) { %>
+    <ul>
+      <% skills.forEach(skill => { %>
+        <li><%= skill.skill_name %></li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No skills information available</p>
+  <% } %>
+  <!-- Add more skills as needed -->
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-skill'">Edit Skill</button>
+</section>
+
+<section class="languages">
+  <h2>Languages</h2>
+  <% if (languages && languages.length > 0) { %>
+    <ul>
+      <% languages.forEach(language => { %>
+        <li><%= language.language_name %></li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No language information available</p>
+  <% } %>
+  <!-- Add more language details as needed -->
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-language'">Edit Language</button>
+</section>
+
+<img src="<%= profileChart %>" alt="Profile Chart">
+
+<button class="btn btn-primary btn-block" onclick="openJoinProjectModal()">Delete My Account</button>
+
+
+<!-- Modal for Join Project -->
+<div id="joinProjectModal" class="modal">
+  <div class="modal-content">
+    <form action="/user-account/delete-account" method="post">
+      <fieldset>
+        <p>Your Account and Account informaton will be deleted permanently.</p>
+        <!-- Add other fields for project role information -->
+        <button type="button" onclick="closeJoinProjectModal()">Cancel</button><button type="submit">Delete My Account</button>
+      </fieldset>
+    </form>
+  </div>
+</div>

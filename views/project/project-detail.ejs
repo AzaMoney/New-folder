@@ -1,0 +1,245 @@
+<div class="container projectDetailPage">
+  <!-- Project Image -->
+
+  <h2>
+    <%= projectDetails.project_name %>
+  </h2>
+
+  <div class="details-container">
+    <p><strong>Description:</strong>
+      <%= projectDetails.project_description %>
+    </p>
+    <p><strong>Mission:</strong>
+      <%= projectDetails.project_mission %>
+    </p>
+    <p><strong>Vision:</strong>
+      <%= projectDetails.project_vision %>
+    </p>
+    <p><strong>Worthy of Note:</strong>
+      <%= projectDetails.project_worthy_of_note %>
+    </p>
+    <p><strong>Location:</strong>
+      <%= projectDetails.project_state %>, <%= projectDetails.project_country %>
+    </p>
+    <!-- Add more project details as needed -->
+  </div>
+
+  <% if (projectRoles && projectRoles.length> 0) { %>
+    <h2>Project Roles:</h2>
+    <ul>
+      <% projectRoles.forEach(role=> { %>
+        <li>
+          <strong>
+            <%= role.project_role_name %>
+          </strong>: <%= role.project_role_description %>
+        </li>
+        <button class="btn btn-primary btn-block" onclick="openJoinProjectModal()">Apply For this position</button>
+        <% }); %>
+    </ul>
+    <% } else { %>
+      <h2>No project roles found</h2>
+      <% } %>
+
+        <% if (teamMembers && teamMembers.length> 0) { %>
+          <h2>Team Members:</h2>
+          <ul class="card-list">
+            <% teamMembers.forEach(member=> { %>
+              <% if (member.project_member_status==='In progress' ) { %>
+                <li class="card detailcard">
+                  <div>
+                    <img src="<%= member.user_picture %>" alt="<%= member.user_name %>" />
+                  </div>
+                  <div>
+                    <h3>
+                      <%= member.user_name %>
+                    </h3>
+                    <p><strong>Role: </strong>
+                      <%= member.project_role %>
+                    </p>
+                    <button class="btn btn-primary btn-block"
+                      onclick="window.location.href='/user-account/user-profile/<%= member.user_id  %>'">View
+                      Resume</button>
+                      <button onclick="openContactOwnerModal()">Contact Project Owner</button>
+                                <% if (projectOwner===projectDetails.project_ownerid ) {
+                                  %>
+                                  <button class="btn btn-primary btn-block" onclick="openTerminateRoleModal()">Terminate
+                                    Role</button>
+                                  <!-- Modal for Terminating Role -->
+                                  <div id="terminateRoleModal" class="modal">
+                                    <div class="modal-content">
+                                      <span class="close" onclick="closeTerminateRoleModal()">&times;</span>
+                                      <h2>Terminate Role</h2>
+                                      <form
+                                        action="/project/end-role/<%= member.project_teamid %>/<%= projectDetails.projectid %>"
+                                        method="post">
+                                        <label for="terminationReason">Reason for Ending Role:</label>
+                                        <textarea id="terminationReason" name="terminationReason" required></textarea>
+                                        <button type="submit">Submit</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                  <% } %>
+                  </div>
+                </li>
+                <% } %>
+                  <% }); %>
+          </ul>
+          <% } else { %>
+            <p>No Team Member</p>
+            <% } %>
+
+              <% if (projectOwner===projectDetails.project_ownerid && teamMembers && teamMembers.length> 0) { %>
+                <h2>Applicants:</h2>
+                <ul class="card-list">
+                  <% teamMembers.forEach(applicant=> { %>
+                    <% if (applicant.project_member_status==='applied' ) { %>
+                      <li class="card detailcard">
+                        <div>
+                          <img src="<%= applicant.user_picture %>" alt="<%= applicant.user_name %>" />
+                        </div>
+                        <div>
+                          <h3>
+                            <%= applicant.user_name %>
+                          </h3>
+                          <p><strong>Role Applied For: </strong>
+                            <%= applicant.project_role %>
+                          </p>
+                          <button class="btn btn-primary btn-block"
+                            onclick="window.location='/project/view-application/<%= applicant.project_teamid %>'">View
+                            Application</button>
+                        </div>
+                      </li>
+                      <% } %>
+                        <% }); %>
+                </ul>
+                <% } %>
+
+
+                  <!-- Project Communication Details -->
+                  <% if (projectComm) { %>
+                    <h2>Project Communication Details:</h2>
+                    <p><strong>Website:</strong>
+                      <%= projectComm.project_comm_website %>
+                    </p>
+                    <p><strong>Facebook:</strong>
+                      <%= projectComm.project_comm_fb %>
+                    </p>
+                    <p><strong>Instagram:</strong>
+                      <%= projectComm.project_comm_insta %>
+                    </p>
+                    <p><strong>LinkedIn:</strong>
+                      <%= projectComm.project_comm_linkedin %>
+                    </p>
+                    <p><strong>Collaboration Link:</strong>
+                      <%= projectComm.project_comm_collablink %>
+                    </p>
+                    <% } else { %>
+                      <p>No project communication details available</p>
+                      <% } %>
+
+                        <!-- Actions -->
+                        <div class="actions">
+                          <% if (projectOwner===projectDetails.project_ownerid) { %>
+                            <button class="btn btn-primary btn-block"
+                              onclick="window.location='/project/edit-project/<%= projectDetails.projectid %>'">Edit
+                              Project</button>
+                            <% } %>
+                              <button onclick="openContactOwnerModal()">Contact Project Owner</button>
+                              <% teamMembers.forEach(member=> { %>
+                                <% if (projectOwner===member.user_id && member.project_member_status==='In progress' ) {
+                                  %>
+                                  <button class="btn btn-primary btn-block" onclick="openTerminateRoleModal()">Leave
+                                    Project</button>
+                                  <!-- Modal for Terminating Role -->
+                                  <div id="terminateRoleModal" class="modal">
+                                    <div class="modal-content">
+                                      <span class="close" onclick="closeTerminateRoleModal()">&times;</span>
+                                      <h2>Terminate Role</h2>
+                                      <form
+                                        action="/project/end-role/<%= member.project_teamid %>/<%= projectDetails.projectid %>"
+                                        method="post">
+                                        <label for="terminationReason">Reason for Ending Role:</label>
+                                        <textarea id="terminationReason" name="terminationReason" required></textarea>
+                                        <button type="submit">Submit</button>
+                                      </form>
+                                    </div>
+                                  </div>
+                                  <% } %>
+                                    <% }); %>
+                                      <button onclick="openReportProjectModal()">Report Project</button>
+                        </div>
+</div>
+
+<!-- Modal for Join Project -->
+<div id="joinProjectModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeJoinProjectModal()">&times;</span>
+    <h2>Join Project</h2>
+    <form action="/project/add-team-member/<%= projectDetails.projectid %>" method="post">
+      <fieldset>
+        <!-- Project Role Information -->
+        <label for="project_role">Pick a position:</label>
+        <select id="project_role" name="project_role" required>
+          <option value="" disabled selected>Select a Role</option>
+          <!-- Iterate over project roles and generate options -->
+          <% projectRoles.forEach(role=> { %>
+            <option value="<%= role.project_role_name %>">
+              <%= role.project_role_name %>
+            </option>
+            <% }); %>
+        </select>
+
+        <label for="project_role_why">Why do you want this role?</label>
+        <textarea id="project_role_why" name="project_role_why" required></textarea>
+
+        <label for="project_time_commitment">How many hours are you commiting weekly:</label>
+        <input type="text" id="project_time_commitment" name="project_time_commitment" required>
+
+        <!-- Add other fields for project role information -->
+        <button type="submit">Submit Application</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<!-- Modal for Contact Project Owner -->
+<div id="contactOwnerModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeContactOwnerModal()">&times;</span>
+    <h2>Contact Project Owner</h2>
+    <form action="/contact-owner" method="post">
+      <label for="yourName">Your Name:</label>
+      <input type="text" id="yourName" name="yourName" required>
+
+      <label for="yourEmail">Your Email:</label>
+      <input type="email" id="yourEmail" name="yourEmail" required>
+
+      <label for="inquiry">Description of Inquiry:</label>
+      <textarea id="inquiry" name="inquiry" rows="4" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal for Report Project -->
+<div id="reportProjectModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeReportProjectModal()">&times;</span>
+    <h2>Report Project</h2>
+    <form action="/report-project" method="post">
+      <label for="violation">Select Reason for Violation:</label>
+      <select id="violation" name="violation" required>
+        <option value="" disabled selected>Select Problem</option>
+        <option value="inappropriate_content">Inappropriate Content</option>
+        <option value="spam">Spam</option>
+        <!-- Add more violation options as needed -->
+      </select>
+
+      <label for="violationDescription">Brief Description:</label>
+      <textarea id="violationDescription" name="violationDescription" rows="4" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>

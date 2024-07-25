@@ -1,0 +1,72 @@
+<nav class="adminNav">
+    <ul class="adminUl">
+        <li><a href="/heWhoShallNotBeNamed/admin">Admin Panel</a></li>
+        <li><a href="/heWhoShallNotBeNamed/user">User Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/project">Project Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/mentorship">Mentorship Admin</a></li>
+    </ul>
+</nav>
+
+
+<form action="../heWhoShallNotBeNamed/create-admin" method="POST">
+    <fieldset>
+        <div>
+            <label for="admin_userID">User ID:</label>
+            <input type="text" id="admin_userID" name="admin_userID" required>
+        </div>
+        <div>
+            <label for="admin_role">Role:</label>
+            <select id="admin_role" name="admin_role" required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="Super Admin">Super Admin</option>
+                <option value="Account Admin">Account Admin</option>
+                <option value="Project Admin">Project Admin</option>
+                <option value="Mentorship Admin">Mentorship Admin</option>
+            </select>
+        </div>
+    </fieldset>
+    <button type="submit">Create Admin</button>
+</form>
+
+<table class="adminTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Email Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% admins.forEach(admin=> { %>
+            <tr>
+                <td>
+                    <%= admin.user_name %>
+                </td>
+                <td>
+                    <%= admin.admin_role %>
+                </td>
+                <td>
+                    <%= admin.user_email %>
+                </td>
+                <td>
+                    <form method="POST" action="../heWhoShallNotBeNamed/update-role">
+                        <input type="hidden" name="adminId" value="<%= admin.adminid %>">
+                        <select name="newRole" type="text">
+                            <option value="" disabled selected>Select Role</option>
+                            <option value="Super Admin">Super Admin</option>
+                            <option value="Account Admin">Account Admin</option>
+                            <option value="Project Admin">Project Admin</option>
+                            <option value="Mentorship Admin">Mentorship Admin</option>
+                        </select>
+                        <button type="submit">Update Role</button>
+                    </form>
+                    <form method="POST" action="../heWhoShallNotBeNamed/delete-admin">
+                        <input type="hidden" name="adminId" value="<%= admin.adminid %>">
+                        <button type="submit">Delete Admin</button>
+                    </form>
+                </td>
+            </tr>
+            <% }); %>
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+<h2>License and Certificate</h2>
+
+<form action="../user-account/edit-certificate" method="post">
+    <fieldset>
+ <!-- Certification Information -->
+    <label for="certificate_name">Certificate Name:</label>
+    <input type="text" id="certificate_name" name="certificate_name" required>
+
+    <label for="issuer_name">Issuer Name:</label>
+    <input type="text" id="issuer_name" name="issuer_name" required>
+
+    <label for="issue_date">Issue Date:</label>
+    <input type="date" id="issue_date" name="issue_date">
+
+    <label for="expiration_date">Expiration Date:</label>
+    <input type="date" id="expiration_date" name="expiration_date">
+
+    <!-- Add other fields for certification information -->
+    <button type="submit">Add Certificate</button>
+</fieldset>
+</form>
+
+<section class="certificate">
+    <h2>License and Certificates</h2>
+    <% if (certificates && certificates.length > 0) { %>
+      <% certificates.forEach(cert => { %>
+        <div class="resumeDelete"><h3><%= cert.certificate_name %></h3><a class="material-icons" href="/user-account/delete-certificate/<%= cert.certificateid %>">&#xe872;</a></div>
+        <p><%= cert.issuer_name %></p>
+        <p><%= cert.issue_date.toISOString().split('T')[0] %></p>
+        <p><%= cert.expiration_date.toISOString().split('T')[0] %></p>
+      <% }); %>
+    <% } else { %>
+      <p>No certificates information available</p>
+    <% } %>
+    <!-- Add more certificate details as needed -->
+  </section>
+  <button class="btn btn-primary btn-block" onclick="window.location='/user-account/my-account'">Done</button>

@@ -1,0 +1,103 @@
+<section class="basic-info">
+  <img src="<%= user.user_picture %>" alt="Profile Image">
+  <h1><%= user.user_name %></h1>
+  <h2><%= employment.position_name %></h2>
+  <h3><%= employment.organization_name %></h3>
+</section>
+
+<section class="60Seconds">
+    <h2><%= user.user_name %> in 60 seconds</h2>
+    <p class="60Secondsp"><%= user.user_about %></p>
+    <button class="btn btn-primary btn-block" >Edit 60 Seconds</button>
+  </section>
+  
+
+<section class="contact">
+  <h2>Contact Information</h2>
+  <p>Email: <%= user.user_email %></p>
+  <p>Phone: <%= user.user_phone || 'N/A' %></p>
+  <p>Website: <%= user.user_website || 'N/A' %></p>
+  <p>LinkedIn: <a href="<%= user.user_linkedin %>" target="_blank">LinkedIn Profile</a></p>
+  <p>GitHub: <a href="<%= user.user_github %>" target="_blank">GitHub Profile</a></p>
+  <!-- Add more contact information as needed -->
+  <button class="btn btn-primary btn-block" >Update Contact</button>
+</section>
+
+<section class="education">
+  <h2>Education</h2>
+  <% if (education && education.length > 0) { %>
+    <% education.forEach(edu => { %>
+      <h3>School: <span class="close" onclick="closeEdit60seconds()">&times;</span></h3><p><%= edu.school_name %></p>
+      <h3>Degree/Diploma: </h3> <p><%= edu.degree_name %></p>
+      <h3>Start Date:</h3><p><%= edu.start_date.toISOString().split('T')[0] %></p>
+      <h3>End Date:</h3><p><%= edu.end_date.toISOString().split('T')[0] %></p>
+    <% }); %>
+  <% } else { %>
+    <p>No education information available.</p>
+  <% } %>
+  <!-- Add more education details as needed -->
+  <button class="btn btn-primary btn-block" >Edit Education</button><button class="btn btn-primary btn-block" >Add Education</button>
+</section>
+
+<section class="certificate">
+  <h2>License and Certificates</h2>
+  <% if (certificates && certificates.length > 0) { %>
+    <% certificates.forEach(cert => { %>
+      <h3>Certification:<span class="close" onclick="closeEdit60seconds()">&times;</span></h3> <p><%= cert.certificate_name %></p>
+      <h3>Issueing Orginazation:</h3><p><%= cert.issuer_name %></p>
+      <h3>Date Issued:</h3><p><%= cert.issue_date.toISOString().split('T')[0] %></p>
+      <h3>Expiration Date:</h3><p><%= cert.expiration_date.toISOString().split('T')[0] %></p>
+    <% }); %>
+  <% } else { %>
+    <p>No certificates information available</p>
+  <% } %>
+  <!-- Add more certificate details as needed -->
+  <button class="btn btn-primary btn-block" >Edit Certificate</button><button class="btn btn-primary btn-block" >Add Certificate</button>
+</section>
+
+<section class="experience">
+  <h2>Work Experience</h2>
+  <% if (employment && employment.length > 0) { %>
+    <% employment.forEach(exp => { %>
+      <h3>Company Name:<span class="close">&times;</span></h3><p><%= exp.organization_name %></p>
+      <h3>Position:</h3><p><%= exp.position_name %></p>
+      <h3>Start Date:</h3> <p><%= exp.start_date.toISOString().split('T')[0] %></p>
+      <h3>End Date:</h3><p><%= exp.end_date.toISOString().split('T')[0] %></p>
+      <h3>Responsilities</h3><p><%= exp.employment_description %></p>
+    <% }); %>
+  <% } else { %>
+    <p>No work experience information available</p>
+  <% } %>
+  <!-- Add more work experience details as needed -->
+  <button class="btn btn-primary btn-block" >Edit Experience</button><button class="btn btn-primary btn-block" >Add Experience</button>
+</section>
+
+<section class="skills">
+  <h2>Skills</h2>
+  <% if (skills && skills.length > 0) { %>
+    <ul>
+      <% skills.forEach(skill => { %>
+        <li><%= skill.skill_name %><span class="close">&times;</span></li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No skills information available</p>
+  <% } %>
+  <!-- Add more skills as needed -->
+  <button class="btn btn-primary btn-block" >Update Skill</button>
+</section>
+
+<section class="languages">
+  <h2>Languages</h2>
+  <% if (languages && languages.length > 0) { %>
+    <ul>
+      <% languages.forEach(language => { %>
+        <li><%= language.language_name %><span class="close">&times;</span></li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No language information available</p>
+  <% } %>
+  <!-- Add more language details as needed -->
+  <button class="btn btn-primary btn-block" >Update Language</button>
+</section>

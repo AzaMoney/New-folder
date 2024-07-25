@@ -1,0 +1,46 @@
+<div class="userAdmin">
+<nav class="adminNav">
+    <ul class="adminUl">
+        <li><a href="/heWhoShallNotBeNamed/admin">Admin Panel</a></li>
+        <li><a href="/heWhoShallNotBeNamed/user">User Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/project">Project Admin</a></li>
+        <li><a href="/heWhoShallNotBeNamed/mentorship">Mentorship Admin</a></li>
+    </ul>
+</nav>
+
+<!-- userPage.ejs -->
+
+<h1>All Users</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.user_id %></td>
+                <td><%= user.user_name %></td>
+                <td class="userAdmin_action">
+                    <form action="/contact-user" method="post">
+                        <input type="hidden" name="userId" value="<%= user.user_id %>">
+                        <button type="submit">Contact</button>
+                    </form>
+                    <form action="/ban-user" method="post">
+                        <input type="hidden" name="userId" value="<%= user.user_id %>">
+                        <button type="submit">Ban</button>
+                    </form>
+                    <form action="/delete-user" method="post">
+                        <input type="hidden" name="userId" value="<%= user.user_id %>">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,284 @@
+<div class="container projectDetailPage">
+    <!-- Project Image -->
+
+    <h2>
+        <%= projectDetails.project_name %>
+    </h2>
+
+    <div class="details-container">
+        <p><strong>Description:</strong>
+            <%= projectDetails.project_description %>
+        </p>
+        <p><strong>Mission:</strong>
+            <%= projectDetails.project_mission %>
+        </p>
+        <p><strong>Vision:</strong>
+            <%= projectDetails.project_vision %>
+        </p>
+        <p><strong>Worthy of Note:</strong>
+            <%= projectDetails.project_worthy_of_note %>
+        </p>
+        <p><strong>Location:</strong>
+            <%= projectDetails.project_state %>, <%= projectDetails.project_country %>
+        </p>
+        <!-- Add more project details as needed -->
+    </div>
+
+    <button class="btn btn-primary btn-block" onclick="openEditBasicInfor()">Edit Basic info</button>
+    
+    <% if (projectRoles && projectRoles.length> 0) { %>
+        <h2>Project Roles:</h2>
+        <ul>
+            <% projectRoles.forEach(role=> { %>
+                <li>
+                    <strong>
+                        <%= role.project_role_name %>
+                    </strong>: <%= role.project_role_description %>
+                </li>
+                <% }); %>
+        </ul>
+        <% } else { %>
+            <h2>project roles:</h2>
+            <% } %>
+
+            <button class="btn btn-primary btn-block" onclick="openEditRole()">Edit Role</button>
+
+                <% if (teamMembers && teamMembers.length> 0) { %>
+                    <h2>Team Members:</h2>
+                    <ul class="card-list">
+                        <% teamMembers.forEach(member=> { %>
+                            <li class="card detailcard">
+                                <div>
+                                    <img src="<%= member.user_picture %>" alt="<%= member.user_name %>" />
+                                </div>
+                                <div>
+                                    <h3>
+                                        <%= member.user_name %>
+                                    </h3>
+                                    <p><strong>Role: </strong>
+                                        <%= member.project_role %>
+                                    </p>
+                                    <button class="btn btn-primary btn-block"
+                                        onclick="window.location.href='/user-account/user-profile/<%= member.user_id  %>'">View
+                                        Resume</button>
+                                </div>
+                            </li>
+                            <% }); %>
+                    </ul>
+                    <% } else { %>
+                        <p>No Team Member</p>
+                        <% } %>
+
+                            <!-- Project Communication Details -->
+                            <% if (projectComm) { %>
+                                <h2>Project Communication Details:</h2>
+                                <p><strong>Website:</strong>
+                                    <%= projectComm.project_comm_website %>
+                                </p>
+                                <p><strong>Facebook:</strong>
+                                    <%= projectComm.project_comm_fb %>
+                                </p>
+                                <p><strong>Instagram:</strong>
+                                    <%= projectComm.project_comm_insta %>
+                                </p>
+                                <p><strong>LinkedIn:</strong>
+                                    <%= projectComm.project_comm_linkedin %>
+                                </p>
+                                <p><strong>Collaboration Link:</strong>
+                                    <%= projectComm.project_comm_collablink %>
+                                </p>
+                                <% } else { %>
+                                    <p>No project communication details available</p>
+                                    <% } %>
+
+                                    <button class="btn btn-primary btn-block" onclick="openEditComm()">Edit contact and Communication</button>
+
+</div>
+
+<!-- Modal for Edit Basic Information -->
+<div id="editBasicInfoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditBasicInfoModal()">&times;</span>
+      <h2>Edit Basic Information</h2>
+      <form action="/project/edit-basic-info/<%= projectDetails.projectid %>" method="POST">
+        <label for="project_name">Project Name:</label>
+        <input type="text" id="project_name" name="project_name" value="<%= projectDetails.project_name %>" required>
+  
+        <label for="project_description">Description:</label>
+        <textarea id="project_description" name="project_description" rows="4" required><%= projectDetails.project_description %></textarea>
+  
+        <label for="project_mission">Mission:</label>
+        <textarea id="project_mission" name="project_mission" rows="4" required><%= projectDetails.project_mission %></textarea>
+  
+        <label for="project_vision">Vision:</label>
+        <textarea id="project_vision" name="project_vision" rows="4" required><%= projectDetails.project_vision %></textarea>
+  
+        <label for="project_worthy_of_note">Worthy of Note:</label>
+        <textarea id="project_worthy_of_note" name="project_worthy_of_note" rows="4" required><%= projectDetails.project_worthy_of_note %></textarea>
+
+        <!-- Project Location Information -->
+        <label for="project_city">City:</label>
+        <input type="text" id="project_city" name="project_city" value="<%= projectDetails.project_city %>" required>
+  
+        <label for="project_state">State:</label>
+        <input type="text" id="project_state" name="project_state" value="<%= projectDetails.project_state %>" required>
+  
+        <label for="project_country">Country:</label>
+        <input type="text" id="project_country" name="project_country" value="<%= projectDetails.project_country %>" required>
+  
+        <!-- Add more fields as needed -->
+  
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>  
+
+<!-- Modal for Edit Role -->
+<div id="editRoleModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditRoleModal()">&times;</span>
+      <h2>Edit Project Roles</h2>
+      <form action="/project/edit-roles/<%= projectDetails.projectid %>" method="POST">
+        <% if (projectRoles && projectRoles.length > 0) { %>
+          <label for="project_role_name">Role Name:</label>
+          <select id="project_role_name" name="project_role_name" required>
+              <option value="" disabled selected>Select a Role</option>
+              
+              <!-- Business Roles -->
+              <optgroup label="Business Roles">
+                  <option value="CEO">CEO (Chief Executive Officer)</option>
+                  <option value="COO">COO (Chief Operating Officer)</option>
+                  <option value="CFO">CFO (Chief Financial Officer)</option>
+                  <option value="CMO">CMO (Chief Marketing Officer)</option>
+                  <option value="CTO">CTO (Chief Technology Officer)</option>
+                  <option value="CHRO">CHRO (Chief Human Resources Officer)</option>
+                  <option value="CIO">CIO (Chief Information Officer)</option>
+                  <option value="General Manager">General Manager</option>
+                  <option value="Sales Manager">Sales Manager</option>
+                  <option value="Customer Service Manager">Customer Service Manager</option>
+                  <!-- Add other business roles as needed -->
+              </optgroup>
+              
+              <!-- Project Roles -->
+              <optgroup label="Project Roles">
+                  <option value="Project Manager">Project Manager</option>
+                  <option value="Team Lead">Team Lead</option>
+                  <option value="Business Analyst">Business Analyst</option>
+                  <option value="Developer">Developer</option>
+                  <option value="Designer">Designer</option>
+                  <option value="Tester">Tester</option>
+                  <option value="Scrum Master">Scrum Master</option>
+                  <option value="Product Owner">Product Owner</option>
+                  <option value="Quality Assurance">Quality Assurance</option>
+                  <!-- Add other project roles as needed -->
+              </optgroup>
+          </select>
+  
+          <label for="project_role_description">Role Description:</label>
+          <textarea id="project_role_description" name="project_role_description"></textarea>
+          <!-- Render project roles if they exist -->
+          <ul>
+            <% projectRoles.forEach(role => { %>
+              <li>
+                <!-- Display existing project role information -->
+                <strong><%= role.project_role_name %>:</strong> <%= role.project_role_description %><a class="material-icons" href="/project/delete-role/<%= role.project_roleid %>/<%= projectDetails.projectid %>">&#xe872;</a>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <!-- Display an empty field set -->
+          <label for="project_role_name">Role Name:</label>
+          <select id="project_role_name" name="project_role_name" required>
+              <option value="" disabled selected>Select a Role</option>
+              
+              <!-- Business Roles -->
+              <optgroup label="Business Roles">
+                  <option value="CEO">CEO (Chief Executive Officer)</option>
+                  <option value="COO">COO (Chief Operating Officer)</option>
+                  <option value="CFO">CFO (Chief Financial Officer)</option>
+                  <option value="CMO">CMO (Chief Marketing Officer)</option>
+                  <option value="CTO">CTO (Chief Technology Officer)</option>
+                  <option value="CHRO">CHRO (Chief Human Resources Officer)</option>
+                  <option value="CIO">CIO (Chief Information Officer)</option>
+                  <option value="General Manager">General Manager</option>
+                  <option value="Sales Manager">Sales Manager</option>
+                  <option value="Customer Service Manager">Customer Service Manager</option>
+                  <!-- Add other business roles as needed -->
+              </optgroup>
+              
+              <!-- Project Roles -->
+              <optgroup label="Project Roles">
+                  <option value="Project Manager">Project Manager</option>
+                  <option value="Team Lead">Team Lead</option>
+                  <option value="Business Analyst">Business Analyst</option>
+                  <option value="Developer">Developer</option>
+                  <option value="Designer">Designer</option>
+                  <option value="Tester">Tester</option>
+                  <option value="Scrum Master">Scrum Master</option>
+                  <option value="Product Owner">Product Owner</option>
+                  <option value="Quality Assurance">Quality Assurance</option>
+                  <!-- Add other project roles as needed -->
+              </optgroup>
+          </select>
+  
+          <label for="project_role_description">Role Description:</label>
+          <textarea id="project_role_description" name="project_role_description"></textarea>
+        <% } %>
+        
+        <!-- Add more fields as needed -->
+        
+        <button type="submit">Add Role</button>
+      </form>
+    </div>
+  </div>
+  
+  
+
+<!-- Modal for Edit Contact Information and Communication -->
+<div id="editContactCommModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditContactCommModal()">&times;</span>
+      <h2>Edit Contact Information and Communication</h2>
+      <form action="/project/edit-project-comm/<%= projectDetails.projectid %>" method="POST">
+        <% if (projectComm) { %>
+          <label for="project_comm_website">Website:</label>
+          <input type="text" id="project_comm_website" name="project_comm_website" value="<%= projectComm.project_comm_website %>" required>
+  
+          <label for="project_comm_fb">Facebook:</label>
+          <input type="text" id="project_comm_fb" name="project_comm_fb" value="<%= projectComm.project_comm_fb %>" required>
+  
+          <label for="project_comm_insta">Instagram:</label>
+          <input type="text" id="project_comm_insta" name="project_comm_insta" value="<%= projectComm.project_comm_insta %>" required>
+  
+          <label for="project_comm_linkedin">LinkedIn:</label>
+          <input type="text" id="project_comm_linkedin" name="project_comm_linkedin" value="<%= projectComm.project_comm_linkedin %>" required>
+  
+          <label for="project_comm_collablink">Collaboration Link:</label>
+          <input type="text" id="project_comm_collablink" name="project_comm_collablink" value="<%= projectComm.project_comm_collablink %>" required>
+        <% } else { %>
+          <label for="project_comm_website">Website:</label>
+          <input type="text" id="project_comm_website" name="project_comm_website" required>
+  
+          <label for="project_comm_fb">Facebook:</label>
+          <input type="text" id="project_comm_fb" name="project_comm_fb" required>
+  
+          <label for="project_comm_insta">Instagram:</label>
+          <input type="text" id="project_comm_insta" name="project_comm_insta" required>
+  
+          <label for="project_comm_linkedin">LinkedIn:</label>
+          <input type="text" id="project_comm_linkedin" name="project_comm_linkedin" required>
+  
+          <label for="project_comm_collablink">Collaboration Link:</label>
+          <input type="text" id="project_comm_collablink" name="project_comm_collablink" required>
+        <% } %>
+  
+        <!-- Add more fields as needed -->
+  
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>  
+  
+  <% if (projectDetails.project_status === "initiated") { %>
+    <button class="btn btn-primary btn-block" onclick="window.location='/project/submit-for-approval/<%= projectDetails.projectid %>'">Submit for Approval</button>
+  <% } %>

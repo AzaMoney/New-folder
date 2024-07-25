@@ -1,0 +1,35 @@
+<h2>Project Information</h2>
+
+<form action="../project/create-project" method="post">
+    <fieldset>
+        <!-- Project Information -->
+        <label for="project_name">Project Name:</label>
+        <input type="text" id="project_name" name="project_name" required>
+
+        <label for="project_description">Project Description:</label>
+        <textarea id="project_description" name="project_description" required></textarea>
+
+        <label for="project_mission">Project Mission:</label>
+        <textarea id="project_mission" name="project_mission" required></textarea>
+
+        <label for="project_vision">Project Vision:</label>
+        <textarea id="project_vision" name="project_vision" required></textarea>
+
+        <label for="project_worthy_of_note">Worthy of Note:</label>
+        <textarea id="project_worthy_of_note" name="project_worthy_of_note"></textarea>
+
+        <!-- Project Location Information -->
+        <label for="project_city">City:</label>
+        <input type="text" id="project_city" name="project_city" required>
+
+        <label for="project_state">State:</label>
+        <input type="text" id="project_state" name="project_state" required>
+
+        <label for="project_country">Country:</label>
+        <input type="text" id="project_country" name="project_country" required>
+
+        <!-- Add other fields for project information -->
+
+        <button type="submit">Next: Project Roles</button>
+    </fieldset>
+</form>

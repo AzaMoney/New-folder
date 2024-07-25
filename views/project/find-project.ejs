@@ -1,0 +1,20 @@
+<div class="container">
+  <% if (allProjects.length > 0) { %>
+    <ul class="card-list">
+      <% allProjects.forEach(project => { %>
+        <% if (project.project_status === 'In progress') { %>
+          <li>
+            <div class="card" onclick="window.location.href='./project-detail/<%= project.projectid %>'">
+              <h3><%= project.project_name %></h3>
+              <p><strong>Description:</strong> <%= project.project_description %></p>
+              <p><strong>Location:</strong> <%= project.project_state %>, <%= project.project_country %></p>
+              <!-- Add more project details as needed -->
+            </div>
+          </li>
+        <% } %>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No projects found.</p>
+  <% } %>
+</div>

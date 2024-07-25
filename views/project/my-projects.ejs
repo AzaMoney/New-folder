@@ -1,0 +1,21 @@
+<!-- views/project/my-projects.ejs -->
+
+<!-- Your Project -->
+<h2>Your Project:</h2>
+<ul class="card-list">
+  <% myProjects.forEach(project => { %>
+    <div class="card" onclick="window.location.href='./project-detail/<%= project.projectid %>'">
+    <li class="myProjectspage"><div><h3><%= project.project_name %> </h3> <p><%= project.project_city %> <%= project.project_state %> </p> </div> <div class="projectPagesd"><p><%= project.project_status %></p> <button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-basic-info'">View</button></div></li>
+    </div>
+  <% }); %>
+</ul>
+
+<!-- Projects that you are part of -->
+<h2>Projects that you are part of:</h2>
+<ul class="card-list">
+  <% myTeam.forEach(project => { %>
+    <div class="card" onclick="window.location.href='./project-detail/<%= project.projectid %>'">
+    <li class="myProjectspage"><div><h3><%= project.project_name %></h3> <p> <%= project.project_city %>, <%= project.project_state %> </p></div> <div class="projectPagesd"><button class="btn btn-primary btn-block" onclick="window.location='/user-account/edit-basic-info'">View</button> </div></li>
+    </div>
+  <% }); %>
+</ul>

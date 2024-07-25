@@ -1,0 +1,537 @@
+/* Small View */
+
+/********************
+*  Body             *
+********************/
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.card-list li {
+  list-style: none;
+}
+
+.card-list {
+  padding: 0px;
+}
+
+.homeH1 {
+  text-align: center;
+  background-color: #add8e6;
+  margin: 0;
+  padding: 30px 0px;
+  color: black;
+}
+
+.homeH2 {
+  text-align: center;
+  background-color: #add8e6;
+  margin: 0;
+  padding-bottom: 30px;
+  color: black;
+}
+
+section {
+  padding: 2em;
+}
+
+.home-section {
+  background-color: #add8e6;
+}
+
+.cta {
+  text-align: center;
+  padding: 2em;
+}
+
+.collab-banner {
+  position: relative;
+  text-align: center;
+  background: linear-gradient( to bottom, #add8e6 0%, #add8e6 50%, white 50%, white 100%)
+}
+
+.collab-banner img {
+  width: 300px;
+  display: block;
+}
+
+.collab-banner p {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  background-color: black;
+  width: 200px;
+  padding: 30px 8px; /* You can adjust the padding as needed */
+  box-sizing: border-box;
+  margin: 0; /* Remove default margin to avoid extra space */
+  text-align: center;
+  color: white;
+}
+
+.about-us-text {
+  text-align: center;
+}
+
+/********************
+*  Header           *
+********************/
+
+header {
+  background-color: rgb(102, 99, 99);
+  color: white;
+  text-align: right;
+  padding: 5px 16px;
+}
+
+/********************
+*  Nav              *
+********************/
+
+.menu-display {
+  display: block;
+}
+
+.header-nav {
+  display: none;
+}
+
+.header-nav ul {
+  display: flex; /* Hide the menu by default on smaller screens */
+  flex-direction: column;
+  /* left: 0; */
+  width: auto;
+  z-index: 1; /* Ensure the menu is above other content */
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  justify-self: center;
+  background-color: black;
+  color: white;
+  margin: 10px 5px;
+}
+
+.top-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#logoID {
+  width: 200px;
+  height: 100px;
+  margin: 0px 10px;
+}
+
+#close-menu-option {
+  display: none;
+  width: 50px;
+  text-align: right;
+  height: 50px;
+  padding-top: 25px;
+}
+
+#hamburger-icon {
+  width: 50px;
+  margin-right: 5px;
+  text-align: right;
+  height: 50px;
+  padding-top: 25px;
+}
+
+.header-nav > ul > li{
+  text-align: center;
+  list-style: none;
+  margin: 5px 0px;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: white;
+}
+
+.button a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px 5px;
+}
+
+.footer-link ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0;
+}
+
+.footer-link ul > li{
+  margin: 5px 0px;
+}
+
+.footer-link a {
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  padding: 0px;
+  font-size: unset;
+  font-weight: unset;
+  margin: 30px 0px;
+}
+
+/* Style the dropdown button and content */
+.dropdown {
+  display: inline-block;
+}
+
+.dropbtn {
+  padding: 10px 0px;
+  text-decoration: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Show the dropdown content when hovering over the dropdown button */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Style the dropdown links */
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.dropdown-content a:hover {
+  background-color: black;
+}
+
+/********************
+*  Buttons          *
+********************/
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1em;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #555;
+}
+
+/********************
+*  Resume Content   *
+********************/
+
+.basic-info {
+  text-align: center;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+.contact, .education, .experience, .skills, .projects {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
+
+/* Small View Specific Styles */
+@media (max-width: 600px) {
+  .contact,
+  .education,
+  .experience,
+  .skills,
+  .projects {
+    text-align: left;
+  }
+}
+
+/********************
+*  Footer           *
+********************/
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  bottom: 0;
+}
+
+.footer-social-media {
+  text-align: center;
+}
+
+.footer-social-media a img{
+  width: 40px;
+}
+
+
+/********************
+*  Form             *
+********************/
+
+form {
+  max-width: 400px; /* Adjust the maximum width as needed for small screens */
+  margin: 0 auto;
+}
+
+/* Style fieldsets to display in a row */
+form fieldset {
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+/* Style labels and input elements */
+form label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+/* Style the submit button */
+form button {
+  background-color: #333;
+  color: white;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #555;
+}
+
+#teamDetailsForm {
+  display: none;
+}
+
+/********************
+*  Cards            *
+********************/
+
+.myProjectspage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.projectPagesd {
+  display: flex;
+  text-align: right;
+  padding: 35px 0;
+}
+
+.projectPagesd p {
+  padding: 0px 5px 0px 0px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  width: 300px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #e2e2e2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.card h2 {
+  margin-top: 10px;
+  color: #333;
+}
+
+.card p {
+  color: #666;
+}
+
+.project-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.team-members {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.team-members h3 {
+  color: #333;
+}
+
+.team-members ul {
+  list-style: none;
+  padding: 0;
+}
+
+.team-members li {
+  margin-bottom: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  max-height: 80vh; /* Set maximum height to 80% of viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: black;
+}
+
+.resumeDelete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.resumeDelete a{
+  text-decoration: none;
+}
+
+.material-icons {
+  padding-top: 5px;
+}
+
+.arrow {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.detailcard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.detailcard img {
+  padding-top: 40px;
+}
+
+.projectDetailPage {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.adminUl {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.adminUl li {
+  list-style: none;
+}
+
+.adminUl a {
+  text-decoration: none;
+}

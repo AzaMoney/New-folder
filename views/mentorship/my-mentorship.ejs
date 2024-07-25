@@ -1,0 +1,114 @@
+<h2>My Mentorship</h2>
+
+<% if (menteeList && menteeList.length > 0) { %>
+  <h3>Mentors:</h3>
+  <ul>
+    <% menteeList.forEach(mentee => { %>
+      <% if (mentee.mentorarea_status === 'In progress' || mentee.mentorarea_status === 'applied') { %>
+      <li>
+        <img src="<%= mentee.user_picture %>" alt="<%= mentee.user_name %>" />
+        <p>Mentor: <%= mentee.user_name %></p>
+        <p>Mentorship Goal: <%= mentee.mentorship_goal %></p>
+        <p> Why I am the best option: <%= mentee.why_good_fit %></p>
+        <% if (mentee.mentorarea_status === 'applied' && mentee.menteeid === userid) { %>
+            <form action="/mentorship/accept-offer/<%= mentee.mentorareaid %>" method="post">
+              <button type="submit">Accept Offer</button>
+            </form>
+            <button onclick="declineOffer('<%= mentee.user_id %>')">Decline Offer</button>
+            <% } %>
+            <% if (mentee.mentorarea_status === 'In progress' && mentee.menteeid === userid) { %>
+              <form action="/mentorship/end-mentorship/<%= mentee.mentorareaid %>" method="post">
+                <button type="submit">End Mentorship</button>
+              </form>
+              <% } %>
+            <button onclick="window.location.href='./mentee-details/<%= mentee.menteeid %>/<%= mentee.mentorshipid %>'">More Details</button>
+            <button onclick="viewResume('<%= mentee.user_id %>')">View Resume</button>
+            <% if (mentee.menteeid === userid) { %>
+            <button onclick="openEditMentorshipModal()">Edit Mentorship</button>
+            <!-- Modal Form for Editing Mentorship -->
+<div id="editMentorshipModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditMentorshipModal()">&times;</span>
+        <form id="editMentorshipForm" action="/mentorship/edit-mentorship/<%= mentee.mentorshipid %>" method="post">
+            <fieldset>
+                <!-- Mentorship Information -->
+                <label for="mentorship_industry">Mentorship Industry:</label>
+                <select id="edit_mentorship_industry" name="mentorship_industry" required>
+                    <option value="" disabled selected>Select an Industry</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Education">Education</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Hospitality">Hospitality</option>
+                    <option value="Telecommunications">Telecommunications</option>
+                    <option value="Consulting">Consulting</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Automotive">Automotive</option>
+                    <option value="Legal">Legal</option>
+                    <!-- Options will be dynamically populated using JavaScript -->
+                </select>
+
+                <label for="mentorship_topic">Mentorship Topic:</label>
+                <select id="edit_mentorship_topic" name="mentorship_topic" required>
+                    <option value="" disabled selected>Select a Topic</option>
+            <option value="Career Planning and Development">Career Planning and Development</option>
+            <option value="Networking and Relationship Building">Networking and Relationship Building</option>
+            <option value="Conflict Resolution and Problem Solving">Conflict Resolution and Problem Solving</option>
+            <option value="Leadership and Management">Leadership and Management</option>
+            <option value="Emotional Intelligence">Emotional Intelligence</option>
+            <option value="Time Management and Productivity">Time Management and Productivity</option>
+            <option value="Workplace Culture and Dynamics">Workplace Culture and Dynamics</option>
+                    <!-- Options will be dynamically populated using JavaScript -->
+                </select>
+
+                <label for="mentorship_goal">Mentorship Goal:</label>
+                <textarea id="edit_mentorship_goal" name="mentorship_goal" required></textarea>
+
+                <label for="action_on_goal">What are you doing about your goal?:</label>
+                <textarea id="edit_action_on_goal" name="action_on_goal" required></textarea>
+
+                <label for="why_a_mentor">What do you need from a mentor:</label>
+                <textarea id="edit_why_a_mentor" name="why_a_mentor" required></textarea>
+
+                <!-- Hidden input field to store mentorship ID -->
+                <input type="hidden" id="edit_mentorship_id" name="mentorship_id" value="">
+
+                <button type="submit">Update Mentorship</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+            <% } %>
+      </li>
+      <% } %>
+    <% }); %>
+  </ul>
+<% } %>
+
+<% if (mentorList && mentorList.length > 0) { %>
+  <h3>Mentees:</h3>
+  <ul>
+    <% mentorList.forEach(mentor => { %>
+      <% if (mentor.mentorarea_status === 'In progress' || mentor.mentorarea_status === 'applied') { %>
+      <li>
+        <img src="<%= mentor.user_picture %>" alt="<%= mentor.user_name %>" />
+        <p>Mentee: <%= mentor.user_name %></p>
+        <p>Mentorship Goal: <%= mentor.mentorship_goal %></p>
+        <% if (mentor.mentorarea_status === 'In progress' && mentor.mentorid === userid) { %>
+          <form action="/mentorship/end-mentorship/<%= mentor.mentorareaid %>" method="post">
+            <button type="submit">End Mentorship</button>
+          </form>
+          <% } %>
+        <button onclick="viewResume('')">View Resume</button>
+        <button onclick="window.location.href='./mentee-details/<%= mentor.menteeid %>/<%= mentor.mentorshipid %>'">More Details</button>
+      </li>
+      <% } %>
+    <% }); %>
+  </ul>
+<% } %>

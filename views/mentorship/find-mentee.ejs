@@ -1,0 +1,22 @@
+<% if (menteesList && menteesList.length> 0) { %>
+    <ul class="card-list">
+        <% menteesList.forEach(mentee=> { %>
+            <li>
+                <div class="card" onclick="window.location.href='./mentee-details/<%= mentee.menteeid %>/<%= mentee.mentorshipid %>'">
+
+                    <img src="<%= mentee.user_picture %>" alt="<%= mentee.user_name %>"><br>
+                    <strong>Mentee Name:</strong>
+                    <%= mentee.user_name %><br>
+                        <strong>Industry:</strong>
+                        <%= mentee.mentorship_industry %><br>
+                            <strong>Topic:</strong>
+                            <%= mentee.mentorship_topic %><br>
+                                <strong>Goal:</strong>
+                                <%= mentee.mentorship_goal %><br>
+                </div>
+            </li>
+            <% }); %>
+    </ul>
+    <% } else { %>
+        <p>No mentees found.</p>
+        <% } %>
